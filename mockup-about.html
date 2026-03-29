@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About — longlostforgotten</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            /* ─── Reset ─────────────────────────────────────────── */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* ─── Tokens ─────────────────────────────────────────── */
+            :root {
+                --bg: #131a12;
+                --surface: #1d2a1b;
+                --text: #e4ede0;
+                --text-muted: #7a8c74;
+                --accent: #c4683a;
+                --link: #8fbe7e;
+                --rule: #243321;
+
+                --font-heading: "Caprasimo", Georgia, serif;
+                --font-body: "Source Serif 4", Georgia, serif;
+                --font-ui: "Inter", system-ui, sans-serif;
+
+                --measure: 680px;
+                --space-xs: 0.375rem;
+                --space-sm: 0.75rem;
+                --space-md: 1.25rem;
+                --space-lg: 2.5rem;
+                --space-xl: 4rem;
+            }
+
+            /* ─── Base ───────────────────────────────────────────── */
+            html {
+                font-size: 18px;
+            }
+
+            body {
+                background-color: var(--bg);
+                background-image:
+                    radial-gradient(
+                        ellipse at 15% 10%,
+                        rgba(196, 104, 58, 0.13) 0%,
+                        transparent 45%
+                    ),
+                    radial-gradient(
+                        ellipse at 85% 20%,
+                        rgba(74, 103, 65, 0.15) 0%,
+                        transparent 40%
+                    ),
+                    radial-gradient(
+                        ellipse at 50% 80%,
+                        rgba(74, 103, 65, 0.1) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        ellipse at 90% 90%,
+                        rgba(196, 104, 58, 0.08) 0%,
+                        transparent 40%
+                    );
+                background-attachment: fixed;
+                color: var(--text);
+                font-family: var(--font-body);
+                line-height: 1.8;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            a {
+                color: var(--link);
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+                text-decoration-color: var(--accent);
+                text-underline-offset: 3px;
+            }
+
+            /* ─── Layout ─────────────────────────────────────────── */
+            .container {
+                max-width: var(--measure);
+                margin-inline: auto;
+                padding-inline: var(--space-md);
+            }
+
+            /* ─── Header / Nav ───────────────────────────────────── */
+            header {
+                padding-block: var(--space-lg);
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .header-inner {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+            }
+
+            .site-name {
+                font-family: var(--font-heading);
+                font-size: 1.65rem;
+                font-weight: 400;
+                letter-spacing: 0.01em;
+                color: var(--text);
+                text-decoration: none;
+            }
+
+            .site-name:hover {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            nav {
+                font-family: var(--font-ui);
+                font-size: 0.72rem;
+                font-weight: 400;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+            }
+
+            nav ul {
+                list-style: none;
+                display: flex;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                color: var(--text-muted);
+                text-decoration: none;
+                transition: color 0.15s;
+            }
+
+            nav a:hover {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            nav a.current {
+                color: var(--text);
+            }
+
+            /* ─── Page Header ────────────────────────────────────── */
+            .page-header {
+                padding-top: var(--space-xl);
+                padding-bottom: var(--space-lg);
+            }
+
+            .page-title {
+                font-family: var(--font-heading);
+                font-size: 3.8rem;
+                font-weight: 400;
+                line-height: 1.05;
+                color: var(--text);
+                letter-spacing: 0.01em;
+            }
+
+            /* ─── About Body ─────────────────────────────────────── */
+            .about-body {
+                padding-bottom: var(--space-xl);
+            }
+
+            .about-body::after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            .about-photo {
+                float: right;
+                width: 200px;
+                height: 200px;
+                margin-left: var(--space-lg);
+                margin-bottom: var(--space-md);
+                background-color: var(--surface);
+                border: 1px solid var(--rule);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                overflow: hidden;
+            }
+
+            .about-photo-label {
+                font-family: var(--font-ui);
+                font-size: 0.62rem;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                opacity: 0.5;
+            }
+
+            .about-body p {
+                font-size: 1rem;
+                line-height: 1.85;
+                color: var(--text);
+                margin-bottom: 1.6em;
+            }
+
+            .about-body p:last-of-type {
+                margin-bottom: 0;
+            }
+
+            /* ─── Rule ───────────────────────────────────────────── */
+            .about-rule {
+                border: none;
+                border-top: 1px solid var(--rule);
+                margin-block: var(--space-xl);
+            }
+
+            /* ─── Find Me Elsewhere ──────────────────────────────── */
+            .elsewhere-heading {
+                font-family: var(--font-ui);
+                font-size: 0.65rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                margin-bottom: var(--space-lg);
+            }
+
+            .elsewhere-list {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+
+            .elsewhere-item a {
+                display: flex;
+                align-items: center;
+                gap: var(--space-md);
+                padding: var(--space-sm) var(--space-md);
+                border: 1px solid var(--rule);
+                border-radius: 3px;
+                text-decoration: none;
+                transition:
+                    border-color 0.15s,
+                    background-color 0.15s;
+            }
+
+            .elsewhere-item a:hover {
+                border-color: var(--link);
+                background-color: rgba(143, 190, 126, 0.05);
+                text-decoration: none;
+            }
+
+            .elsewhere-icon {
+                width: 20px;
+                height: 20px;
+                flex-shrink: 0;
+                fill: var(--text-muted);
+                transition: fill 0.15s;
+            }
+
+            .elsewhere-item a:hover .elsewhere-icon {
+                fill: var(--link);
+            }
+
+            .elsewhere-text {
+                display: flex;
+                flex-direction: column;
+                gap: 0.15em;
+            }
+
+            .elsewhere-platform {
+                font-family: var(--font-ui);
+                font-size: 0.68rem;
+                font-weight: 500;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                transition: color 0.15s;
+            }
+
+            .elsewhere-item a:hover .elsewhere-platform {
+                color: var(--link);
+            }
+
+            .elsewhere-handle {
+                font-family: var(--font-ui);
+                font-size: 0.82rem;
+                font-weight: 300;
+                color: var(--text);
+                letter-spacing: 0.01em;
+            }
+
+            /* ─── Footer ─────────────────────────────────────────── */
+            footer {
+                border-top: 1px solid var(--rule);
+                padding-block: var(--space-lg);
+            }
+
+            .footer-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+            }
+
+            .footer-copy {
+                font-family: var(--font-body);
+                font-style: italic;
+                font-size: 0.78rem;
+                color: var(--text-muted);
+            }
+
+            .social-links {
+                display: flex;
+                gap: var(--space-md);
+                list-style: none;
+            }
+
+            .social-links a {
+                font-family: var(--font-ui);
+                color: var(--text-muted);
+                font-size: 0.68rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+
+            .social-links a:hover {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            /* ─── Responsive ─────────────────────────────────────── */
+            @media (max-width: 600px) {
+                html {
+                    font-size: 16px;
+                }
+
+                .header-inner {
+                    flex-direction: column;
+                    gap: var(--space-sm);
+                }
+
+                .page-title {
+                    font-size: 2.8rem;
+                }
+
+                .about-photo {
+                    float: none;
+                    width: 160px;
+                    height: 160px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: var(--space-md);
+                    display: block;
+                }
+
+                .footer-inner {
+                    flex-direction: column;
+                    gap: var(--space-md);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ─── Header ──────────────────────────────────────────── -->
+        <header>
+            <div class="container">
+                <div class="header-inner">
+                    <a href="/" class="site-name">longlostforgotten</a>
+                    <nav aria-label="Main navigation">
+                        <ul>
+                            <li><a href="/writing">Writing</a></li>
+                            <li><a href="/music">Music</a></li>
+                            <li><a href="/reading">Reading</a></li>
+                            <li><a href="/watching">Watching</a></li>
+                            <li><a href="/about" class="current">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- ─── Main ─────────────────────────────────────────────── -->
+        <main>
+            <div class="container">
+                <!-- Page Title -->
+                <div class="page-header">
+                    <h1 class="page-title">about</h1>
+                </div>
+
+                <!-- Bio -->
+                <div class="about-body">
+                    <div class="about-photo" aria-hidden="true">
+                        <span class="about-photo-label">photo</span>
+                    </div>
+
+                    <p>
+                        I'm a writer and occasional musician living somewhere
+                        that gets cold enough in winter to make you mean about
+                        it and warm enough in spring to make you forget. I go by
+                        longlostforgotten here, mostly because it felt right and
+                        also because by the time I thought of something better
+                        the name had already stuck. I make things — songs,
+                        sentences, playlists, photographs on film I'm always a
+                        little late to have developed. Most of it is for myself.
+                        Some of it ends up here.
+                    </p>
+                    <p>
+                        This site is a record. Not a portfolio, not a brand, not
+                        a place I'm trying to grow. Just somewhere to put the
+                        things I'd otherwise lose — the album I listened to on
+                        repeat for a fortnight last February, the film that
+                        rearranged something in me on a Tuesday night, the books
+                        I finished at two in the morning and couldn't stop
+                        thinking about. I've kept notebooks for years, with all
+                        the usual guilt about the gaps, and what I've learned is
+                        that a patchy record is still a record. The point was
+                        never perfect continuity.
+                    </p>
+                    <p>
+                        Day to day: too much coffee, a day job I won't bore you
+                        with, a cat with strong opinions about when I should
+                        stop working. I read more books than I finish and start
+                        more songs than I record. I walk a lot, usually with no
+                        particular destination, which is also roughly how I
+                        approach most creative work.
+                    </p>
+                    <p>
+                        I've been meaning to make something like this for years.
+                        The usual reasons held me back — not enough time, not
+                        enough to say, not sure it was for anyone. In the end I
+                        decided it didn't need to be ready, and that waiting for
+                        ready is just a slow way of not doing it. So here it is.
+                        Pull up a chair.
+                    </p>
+                </div>
+
+                <!-- Rule -->
+                <hr class="about-rule" />
+
+                <!-- Find Me Elsewhere -->
+                <section aria-labelledby="elsewhere-heading">
+                    <h2 class="elsewhere-heading" id="elsewhere-heading">
+                        Find me elsewhere
+                    </h2>
+                    <ul class="elsewhere-list">
+                        <li class="elsewhere-item">
+                            <a
+                                href="https://bsky.app/profile/longlostforgotten.com"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <svg
+                                    class="elsewhere-icon"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.44 6.734-1.267 7.842-5.727.273 4.765 1.263 10.86 7.2 5.727 4.028-3.795 1.7-6.603-1.539-7.078a8.741 8.741 0 0 1-.413-.056c.14.017.279.036.413.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.3-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"
+                                    />
+                                </svg>
+                                <span class="elsewhere-text">
+                                    <span class="elsewhere-platform"
+                                        >Bluesky</span
+                                    >
+                                    <span class="elsewhere-handle"
+                                        >@longlostforgotten.com</span
+                                    >
+                                </span>
+                            </a>
+                        </li>
+                        <li class="elsewhere-item">
+                            <a
+                                href="https://www.instagram.com/lnglostfrgttn/"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <svg
+                                    class="elsewhere-icon"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                                    />
+                                </svg>
+                                <span class="elsewhere-text">
+                                    <span class="elsewhere-platform"
+                                        >Instagram</span
+                                    >
+                                    <span class="elsewhere-handle"
+                                        >@lnglostfrgttn</span
+                                    >
+                                </span>
+                            </a>
+                        </li>
+                        <li class="elsewhere-item">
+                            <a
+                                href="https://www.threads.com/@lnglostfrgttn"
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                <svg
+                                    class="elsewhere-icon"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.851 1.205 8.604.024 12.185 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.651Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.783 2.717 1.712 1.178-.065 2.906-.536 3.221-3.467a9.207 9.207 0 0 0-2.283-.409z"
+                                    />
+                                </svg>
+                                <span class="elsewhere-text">
+                                    <span class="elsewhere-platform"
+                                        >Threads</span
+                                    >
+                                    <span class="elsewhere-handle"
+                                        >@lnglostfrgttn</span
+                                    >
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Bottom breathing room -->
+                <div style="height: var(--space-xl)"></div>
+            </div>
+        </main>
+
+        <!-- ─── Footer ────────────────────────────────────────────── -->
+        <footer>
+            <div class="container">
+                <div class="footer-inner">
+                    <p class="footer-copy">longlostforgotten</p>
+                    <ul class="social-links">
+                        <li>
+                            <a
+                                href="https://bsky.app/profile/longlostforgotten.com"
+                                target="_blank"
+                                rel="noopener"
+                                >Bluesky</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.instagram.com/lnglostfrgttn/"
+                                target="_blank"
+                                rel="noopener"
+                                >Instagram</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.threads.com/@lnglostfrgttn"
+                                target="_blank"
+                                rel="noopener"
+                                >Threads</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

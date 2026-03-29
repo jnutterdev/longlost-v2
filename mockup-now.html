@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>now — longlostforgotten</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- Caprasimo + Source Serif 4 + Inter -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            /* ─── Reset ─────────────────────────────────────────── */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* ─── Tokens: Forest palette (locked) ───────────────── */
+            :root {
+                --bg: #131a12;
+                --surface: #1d2a1b;
+                --text: #e4ede0;
+                --text-muted: #7a8c74;
+                --accent: #c4683a;
+                --link: #8fbe7e;
+                --rule: #243321;
+
+                --font-heading: "Caprasimo", Georgia, serif;
+                --font-body: "Source Serif 4", Georgia, serif;
+                --font-ui: "Inter", system-ui, sans-serif;
+
+                --measure: 680px;
+                --space-xs: 0.375rem;
+                --space-sm: 0.75rem;
+                --space-md: 1.25rem;
+                --space-lg: 2.5rem;
+                --space-xl: 4rem;
+            }
+
+            /* ─── Base ───────────────────────────────────────────── */
+            html {
+                font-size: 18px;
+            }
+
+            body {
+                background-color: var(--bg);
+                background-image:
+                    radial-gradient(
+                        ellipse at 15% 10%,
+                        rgba(196, 104, 58, 0.13) 0%,
+                        transparent 45%
+                    ),
+                    radial-gradient(
+                        ellipse at 85% 20%,
+                        rgba(74, 103, 65, 0.15) 0%,
+                        transparent 40%
+                    ),
+                    radial-gradient(
+                        ellipse at 50% 80%,
+                        rgba(74, 103, 65, 0.1) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        ellipse at 90% 90%,
+                        rgba(196, 104, 58, 0.08) 0%,
+                        transparent 40%
+                    );
+                background-attachment: fixed;
+                color: var(--text);
+                font-family: var(--font-body);
+                line-height: 1.75;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            a {
+                color: var(--link);
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+                text-decoration-color: var(--accent);
+                text-underline-offset: 3px;
+            }
+
+            /* ─── Layout ─────────────────────────────────────────── */
+            .container {
+                max-width: var(--measure);
+                margin-inline: auto;
+                padding-inline: var(--space-md);
+            }
+
+            /* ─── Header / Nav ───────────────────────────────────── */
+            header {
+                padding-block: var(--space-lg);
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .header-inner {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+            }
+
+            .site-name {
+                font-family: var(--font-heading);
+                font-size: 1.65rem;
+                font-weight: 400;
+                letter-spacing: 0.01em;
+                color: var(--text);
+                text-decoration: none;
+            }
+
+            .site-name:hover {
+                text-decoration: none;
+                color: var(--accent);
+            }
+
+            nav {
+                font-family: var(--font-ui);
+                font-size: 0.72rem;
+                font-weight: 400;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+            }
+
+            nav ul {
+                list-style: none;
+                display: flex;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                color: var(--text-muted);
+                text-decoration: none;
+                transition: color 0.15s;
+            }
+
+            nav a:hover {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            /* ─── Now: Page header ───────────────────────────────── */
+            .now-header {
+                padding-top: var(--space-xl);
+                padding-bottom: var(--space-lg);
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .now-title {
+                font-family: var(--font-heading);
+                font-size: 3.8rem;
+                font-weight: 400;
+                line-height: 1.05;
+                color: var(--text);
+                letter-spacing: 0.01em;
+            }
+
+            .now-updated {
+                margin-top: var(--space-sm);
+                font-family: var(--font-ui);
+                font-size: 0.63rem;
+                font-weight: 400;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+            }
+
+            /* ─── Now: Intro ─────────────────────────────────────── */
+            .now-intro {
+                padding-block: var(--space-lg);
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .now-intro p {
+                font-size: 1rem;
+                line-height: 1.85;
+                color: var(--text);
+                max-width: 58ch;
+            }
+
+            /* ─── Now: Sections ──────────────────────────────────── */
+            .now-sections {
+                padding-top: var(--space-xl);
+                padding-bottom: var(--space-xl);
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-xl);
+            }
+
+            .now-section {
+                display: grid;
+                grid-template-columns: 130px 1fr;
+                gap: var(--space-lg);
+                align-items: start;
+            }
+
+            /* The label column */
+            .section-label {
+                padding-top: 0.28em; /* optical alignment with first text line */
+                font-family: var(--font-ui);
+                font-size: 0.62rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                line-height: 1;
+            }
+
+            /* The content column */
+            .section-content {
+                font-size: 1rem;
+                line-height: 1.85;
+                color: var(--text);
+            }
+
+            .section-content p {
+                margin-bottom: 0.85em;
+            }
+
+            .section-content p:last-child {
+                margin-bottom: 0;
+            }
+
+            /* Inline title styling (book, album, show) */
+            .section-content em {
+                font-style: italic;
+            }
+
+            /* Book entries: title line + small note beneath */
+            .book-entry {
+                margin-bottom: 1.1em;
+            }
+
+            .book-entry:last-child {
+                margin-bottom: 0;
+            }
+
+            .book-line {
+                display: block;
+                line-height: 1.5;
+            }
+
+            .book-author {
+                color: var(--text-muted);
+            }
+
+            .book-note {
+                display: block;
+                margin-top: 0.2em;
+                font-size: 0.88rem;
+                color: var(--text-muted);
+                line-height: 1.6;
+            }
+
+            /* ─── Now: Attribution ───────────────────────────────── */
+            .now-attribution {
+                border-top: 1px solid var(--rule);
+                padding-top: var(--space-lg);
+                padding-bottom: var(--space-xl);
+            }
+
+            .now-attribution p {
+                font-family: var(--font-body);
+                font-style: italic;
+                font-size: 0.78rem;
+                line-height: 1.7;
+                color: var(--text-muted);
+            }
+
+            /* ─── Footer ─────────────────────────────────────────── */
+            footer {
+                border-top: 1px solid var(--rule);
+                padding-block: var(--space-lg);
+            }
+
+            .footer-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+            }
+
+            .footer-copy {
+                font-family: var(--font-body);
+                font-style: italic;
+                font-size: 0.78rem;
+                color: var(--text-muted);
+            }
+
+            .social-links {
+                display: flex;
+                gap: var(--space-md);
+                list-style: none;
+            }
+
+            .social-links a {
+                font-family: var(--font-ui);
+                color: var(--text-muted);
+                font-size: 0.68rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+            }
+
+            .social-links a:hover {
+                color: var(--accent);
+                text-decoration: none;
+            }
+
+            /* ─── Responsive ─────────────────────────────────────── */
+            @media (max-width: 600px) {
+                html {
+                    font-size: 16px;
+                }
+
+                .header-inner {
+                    flex-direction: column;
+                    gap: var(--space-sm);
+                }
+
+                .now-title {
+                    font-size: 2.9rem;
+                }
+
+                .now-section {
+                    grid-template-columns: 1fr;
+                    gap: var(--space-xs);
+                }
+
+                .section-label {
+                    padding-top: 0;
+                }
+
+                .footer-inner {
+                    flex-direction: column;
+                    gap: var(--space-md);
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- ─── Header ──────────────────────────────────────────── -->
+        <header>
+            <div class="container">
+                <div class="header-inner">
+                    <a href="/" class="site-name">longlostforgotten</a>
+                    <nav aria-label="Main navigation">
+                        <ul>
+                            <li><a href="/writing">Writing</a></li>
+                            <li><a href="/music">Music</a></li>
+                            <li><a href="/reading">Reading</a></li>
+                            <li><a href="/watching">Watching</a></li>
+                            <li><a href="/about">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- ─── Main ─────────────────────────────────────────────── -->
+        <main>
+            <div class="container">
+                <!-- Page header -->
+                <div class="now-header">
+                    <h1 class="now-title">now</h1>
+                    <p class="now-updated">Last updated July 14, 2025</p>
+                </div>
+
+                <!-- Intro -->
+                <div class="now-intro">
+                    <p>
+                        Here's what's going on at the moment — the usual mix of
+                        books half-finished, records on heavy rotation, and
+                        projects that keep refusing to be done.
+                    </p>
+                </div>
+
+                <!-- Sections -->
+                <div class="now-sections">
+                    <!-- Reading -->
+                    <div class="now-section">
+                        <div class="section-label">Reading</div>
+                        <div class="section-content">
+                            <div class="book-entry">
+                                <span class="book-line"
+                                    ><em>The Dispossessed</em>
+                                    <span class="book-author"
+                                        >— Ursula K. Le Guin</span
+                                    ></span
+                                >
+                                <span class="book-note"
+                                    >A reread. Somehow more unsettling now than
+                                    when I first came to it. Keeps asking
+                                    questions I don't have better answers
+                                    to.</span
+                                >
+                            </div>
+                            <div class="book-entry">
+                                <span class="book-line"
+                                    ><em>Piranesi</em>
+                                    <span class="book-author"
+                                        >— Susanna Clarke</span
+                                    ></span
+                                >
+                                <span class="book-note"
+                                    >Only a few chapters in, already completely
+                                    disoriented — in the best possible
+                                    way.</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listening -->
+                    <div class="now-section">
+                        <div class="section-label">Listening</div>
+                        <div class="section-content">
+                            <p>
+                                <em>Javelin</em> by Sufjan Stevens. Have been
+                                going back to it almost every day for weeks now.
+                                It sits in a register I can't quite name —
+                                somewhere between grief and gratitude, the two
+                                things often indistinguishable from each other.
+                                The kind of record that asks you to slow down
+                                and actually be in the room.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Watching -->
+                    <div class="now-section">
+                        <div class="section-label">Watching</div>
+                        <div class="section-content">
+                            <p>
+                                Working through <em>The Bear</em>, season two. I
+                                knew it would be good going in; I didn't know it
+                                would do quite what it's doing. There are
+                                individual scenes I've thought about for days
+                                after watching them. That doesn't happen as
+                                often as it should.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Working on -->
+                    <div class="now-section">
+                        <div class="section-label">Working on</div>
+                        <div class="section-content">
+                            <p>
+                                A handful of demos that may or may not
+                                eventually become songs. One of them feels like
+                                it's almost there — which, in my experience,
+                                usually means I'm about to take it completely
+                                apart and start again from the beginning.
+                            </p>
+                            <p>
+                                A longer piece of writing about memory and
+                                photographs that I keep abandoning and returning
+                                to. I think that's probably the right
+                                relationship to have with it for now. It'll
+                                finish when it's ready.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Lately -->
+                    <div class="now-section">
+                        <div class="section-label">Lately</div>
+                        <div class="section-content">
+                            <p>
+                                The days have been long and slow in a way that
+                                feels almost deliberate, like summer is asking
+                                something of me that I haven't quite worked out
+                                yet. A lot of early mornings, a lot of coffee
+                                going cold on the desk. The city has emptied out
+                                a little — the good kind of empty, where you can
+                                hear your own footsteps and the heat sits
+                                differently on everything. I've been trying to
+                                sit with things instead of rushing past them.
+                                I'm not sure how well it's going, but it feels
+                                like a worthwhile thing to attempt.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attribution -->
+                <div class="now-attribution">
+                    <p>
+                        The /now page is a personal web tradition — a snapshot
+                        of what someone's actually working on and thinking
+                        about, updated when things change.
+                        <a href="https://nownownow.com"
+                            >Learn more at nownownow.com.</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- ─── Footer ────────────────────────────────────────────── -->
+        <footer>
+            <div class="container">
+                <div class="footer-inner">
+                    <p class="footer-copy">longlostforgotten</p>
+                    <ul class="social-links">
+                        <li>
+                            <a
+                                href="https://bsky.app/profile/longlostforgotten.com"
+                                target="_blank"
+                                rel="noopener"
+                                >Bluesky</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.instagram.com/lnglostfrgttn/"
+                                target="_blank"
+                                rel="noopener"
+                                >Instagram</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.threads.com/@lnglostfrgttn"
+                                target="_blank"
+                                rel="noopener"
+                                >Threads</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
