@@ -1,5 +1,6 @@
 ---
 import Page from "../../layouts/Page.astro";
+import Rating from "../../components/Rating.astro";
 import { getCollection } from "astro:content";
 
 const entries = (await getCollection("film"))
@@ -29,6 +30,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
                         )}
                     </p>
                     <span class="entry-date">{dateFormatter.format(entry.data.date)}</span>
+                    {entry.data.rating && <Rating rating={entry.data.rating} icon="fa-tv" />}
                 </article>
             ))}
         </div>

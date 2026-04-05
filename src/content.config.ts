@@ -19,20 +19,7 @@ const music = defineCollection({
         embedUrl: z.string().url(),
         platform: z.enum(["soundcloud", "bandcamp"]).optional(),
         alternatePlatformUrl: z.string().url().optional(),
-        tags: z.array(z.string()).default([]),
-    }),
-});
-
-const photography = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/photography" }),
-    schema: z.object({
-        title: z.string(),
-        date: z.coerce.date(),
-        images: z.array(z.object({
-            src: z.string(),
-            caption: z.string().optional(),
-            alt: z.string().optional(),
-        })).default([]),
+        rating: z.number().min(1).max(5).optional(),
         tags: z.array(z.string()).default([]),
     }),
 });
@@ -44,6 +31,7 @@ const books = defineCollection({
         author: z.string(),
         date: z.coerce.date(),
         cover: z.string().optional(),
+        coverAlt: z.string().optional(),
         status: z.enum(["reading", "finished", "abandoned"]).optional(),
         rating: z.number().min(1).max(5).optional(),
         tags: z.array(z.string()).default([]),
@@ -63,20 +51,9 @@ const film = defineCollection({
     }),
 });
 
-const misc = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/content/misc" }),
-    schema: z.object({
-        title: z.string(),
-        date: z.coerce.date(),
-        linkUrl: z.string().url().optional(),
-    }),
-});
-
 export const collections = {
     writing,
     music,
-    photography,
     books,
     film,
-    misc,
 };

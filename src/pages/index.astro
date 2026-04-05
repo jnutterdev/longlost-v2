@@ -3,22 +3,18 @@ import Page from "../layouts/Page.astro";
 import { getCollection } from "astro:content";
 
 // Gather all content types into one feed, sorted newest first
-const [writing, music, photography, books, film, misc] = await Promise.all([
+const [writing, music, books, film] = await Promise.all([
     getCollection("writing"),
     getCollection("music"),
-    getCollection("photography"),
     getCollection("books"),
     getCollection("film"),
-    getCollection("misc"),
 ]);
 
 const feed = [
     ...writing.map(e => ({ ...e, type: "writing", href: `/writing/${e.id}` })),
     ...music.map(e => ({ ...e, type: "music", href: `/music/${e.id}` })),
-    ...photography.map(e => ({ ...e, type: "photography", href: `/photography/${e.id}` })),
     ...books.map(e => ({ ...e, type: "books", href: `/reading/${e.id}` })),
     ...film.map(e => ({ ...e, type: "film", href: `/watching/${e.id}` })),
-    ...misc.map(e => ({ ...e, type: "misc", href: `/misc/${e.id}` })),
 ].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {

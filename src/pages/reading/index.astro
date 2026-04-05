@@ -1,5 +1,6 @@
 ---
 import Page from "../../layouts/Page.astro";
+import Rating from "../../components/Rating.astro";
 import { getCollection } from "astro:content";
 
 const entries = (await getCollection("books"))
@@ -25,6 +26,7 @@ const finished = entries.filter(e => e.data.status !== "reading");
                                 <a href={`/reading/${entry.id}`}>{entry.data.bookTitle}</a>
                             </h3>
                             <p class="book-author">{entry.data.author}</p>
+                            {entry.data.rating && <Rating rating={entry.data.rating} icon="fa-dragon" />}
                         </article>
                     ))}
                 </div>
@@ -41,6 +43,7 @@ const finished = entries.filter(e => e.data.status !== "reading");
                                 <a href={`/reading/${entry.id}`}>{entry.data.bookTitle}</a>
                             </h3>
                             <p class="book-author">{entry.data.author}</p>
+                            {entry.data.rating && <Rating rating={entry.data.rating} icon="fa-dragon" />}
                         </article>
                     ))}
                 </div>

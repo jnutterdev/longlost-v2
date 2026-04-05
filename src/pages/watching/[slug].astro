@@ -4,7 +4,7 @@ import Rating from "../../components/Rating.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-    const entries = await getCollection("music");
+    const entries = await getCollection("film");
     return entries.map(entry => ({
         params: { slug: entry.id },
         props: { entry },
@@ -17,51 +17,34 @@ const { Content } = await render(entry);
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric", month: "long", day: "numeric",
 });
-
-// Build the correct embed src from the embedUrl
-const { embedUrl, platform, alternatePlatformUrl } = entry.data;
-const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCloud";
 ---
 
-<Page title={entry.data.title} currentNav="music">
+<Page title={entry.data.mediaTitle} currentNav="watching">
     <div class="container">
         <div class="post-header">
             <div class="post-meta">
-                <span class="type-pill music">Music</span>
+                <span class="type-pill film">Film</span>
                 <span class="post-date">{dateFormatter.format(entry.data.date)}</span>
+                {entry.data.mediaType && (
+                    <span class="post-media-type">{entry.data.mediaType}</span>
+                )}
             </div>
-            <h1 class="post-title">{entry.data.title}</h1>
-            {entry.data.rating && <Rating rating={entry.data.rating} />}
-        </div>
-
-        <!-- Embed -->
-        <div class="music-embed">
-            {platform && (
-                <p class="embed-label">{platform.charAt(0).toUpperCase() + platform.slice(1)}</p>
-            )}
-            <iframe
-                class="embed-iframe"
-                src={embedUrl}
-                scrolling="no"
-                frameborder="no"
-                allow="autoplay"
-                title={entry.data.title}
-            ></iframe>
-            {alternatePlatformUrl && (
-                <p class="embed-also">
-                    Also on <a href={alternatePlatformUrl} target="_blank" rel="noopener">{alternatePlatformLabel}</a>
+            <h1 class="post-title">{entry.data.mediaTitle}</h1>
+            {(entry.data.director || entry.data.year) && (
+                <p class="post-credits">
+                    {[entry.data.director, entry.data.year].filter(Boolean).join(", ")}
                 </p>
             )}
+            {entry.data.rating && <Rating rating={entry.data.rating} icon="fa-tv" />}
         </div>
 
-        <!-- Notes -->
         <div class="post-body">
             <Content />
 
             {entry.data.tags.length > 0 && (
                 <div class="post-tags">
                     {entry.data.tags.map(tag => (
-                        <a href={`/music/tags/${tag}`} class="tag">{tag}</a>
+                        <a href={`/watching/tags/${tag}`} class="tag">{tag}</a>
                     ))}
                 </div>
             )}
@@ -80,6 +63,7 @@ const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCl
         align-items: center;
         gap: var(--space-sm);
         margin-bottom: var(--space-md);
+        flex-wrap: wrap;
     }
 
     .post-date {
@@ -88,6 +72,17 @@ const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCl
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--text-muted);
+    }
+
+    .post-media-type {
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border: 1px solid var(--rule);
+        padding: 0.15em 0.55em;
+        border-radius: 2px;
     }
 
     .post-title {
@@ -99,38 +94,18 @@ const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCl
         color: var(--text);
         letter-spacing: 0.01em;
         max-width: 22ch;
+        margin-bottom: var(--space-xs);
     }
 
-    .music-embed {
-        margin-block: var(--space-xl);
-    }
-
-    .embed-label {
+    .post-credits {
         font-family: var(--font-ui);
-        font-size: 0.62rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        font-size: 0.9rem;
         color: var(--text-muted);
         margin-bottom: var(--space-sm);
     }
 
-    .embed-iframe {
-        width: 100%;
-        height: 166px;
-        border: none;
-        border-radius: 3px;
-        display: block;
-    }
-
-    .embed-also {
-        margin-top: var(--space-sm);
-        font-family: var(--font-ui);
-        font-size: 0.7rem;
-        color: var(--text-muted);
-    }
-
     .post-body {
-        padding-bottom: var(--space-xl);
+        padding-block: var(--space-xl);
     }
 
     .post-body :global(p) {
@@ -139,6 +114,28 @@ const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCl
         color: var(--text);
         margin-bottom: 1.6em;
         max-width: 65ch;
+    }
+
+    .post-body :global(h2) {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-top: 2.5em;
+        margin-bottom: 0.75em;
+        line-height: 1.2;
+    }
+
+    .post-body :global(blockquote) {
+        margin-block: 2em;
+        padding-left: var(--space-md);
+        border-left: 2px solid var(--accent);
+        font-style: italic;
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        max-width: 55ch;
     }
 
     .post-tags {

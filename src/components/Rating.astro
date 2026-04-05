@@ -1,0 +1,37 @@
+---
+interface Props {
+    rating: number;
+    max?: number;
+    icon?: string;
+}
+
+const { rating, max = 5, icon = "fa-skull" } = Astro.props;
+const safeRating = Math.min(Math.max(Math.round(rating), 0), max);
+---
+
+<div class="rating" aria-label={`${safeRating} out of ${max}`} title={`${safeRating} / ${max}`}>
+    {Array.from({ length: max }, (_, i) => (
+        <i class={`fa-solid ${icon} ${i < safeRating ? "filled" : "empty"}`} aria-hidden="true"></i>
+    ))}
+</div>
+
+<style>
+    .rating {
+        display: inline-flex;
+        gap: 0.3em;
+        align-items: center;
+    }
+
+    .rating i {
+        font-size: 0.85em;
+        transition: color 0.1s;
+    }
+
+    .rating i.filled {
+        color: var(--accent);
+    }
+
+    .rating i.empty {
+        color: var(--rule);
+    }
+</style>

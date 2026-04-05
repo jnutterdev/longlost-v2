@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "dev:cms": "tinacms dev -c \"astro dev --port 4321\"",
     "build": "astro build",
+    "build:ci": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

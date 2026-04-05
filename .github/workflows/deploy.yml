@@ -1,0 +1,46 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Tina + Astro)
+        run: npm run build:ci
+        env:
+          TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@v5
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          SOURCE: dist/
+          TARGET: ${{ secrets.DEPLOY_PATH }}
+          # Sync and prune files removed from dist/
+          ARGS: -rlgoDzvc --delete
+          # Don't overwrite the server's .htaccess
+          EXCLUDE: ".htaccess"

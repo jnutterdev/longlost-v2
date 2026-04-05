@@ -85,10 +85,8 @@ a:hover {
 
 .type-pill.writing  { background-color: var(--accent); }
 .type-pill.music    { background-color: #4A6B7A; }
-.type-pill.photo    { background-color: #8B6040; }
 .type-pill.books    { background-color: #7A6B4A; }
 .type-pill.film     { background-color: #6B5578; }
-.type-pill.misc     { background-color: #4A4A4A; }
 
 /* ─── Tags ───────────────────────────────────────────── */
 .tag {
