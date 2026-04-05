@@ -1,0 +1,103 @@
+---
+interface Props {
+    currentNav?: string;
+}
+
+const { currentNav } = Astro.props;
+
+const nav = [
+    { href: "/writing",  label: "Writing" },
+    { href: "/music",    label: "Music" },
+    { href: "/reading",  label: "Reading" },
+    { href: "/watching", label: "Watching" },
+    { href: "/about",    label: "About" },
+];
+---
+
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <a href="/" class="site-name">longlostforgotten</a>
+            <nav aria-label="Main navigation">
+                <ul>
+                    {nav.map(({ href, label }) => (
+                        <li>
+                            <a
+                                href={href}
+                                class={currentNav === label.toLowerCase() ? "current" : ""}
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<style>
+    header {
+        padding-block: var(--space-lg);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+
+    .site-name {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.65rem;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    .site-name:hover {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    nav {
+        font-family: var(--font-ui);
+        font-size: 0.72rem;
+        font-weight: 400;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.15s;
+    }
+
+    nav a:hover {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    nav a.current {
+        color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+        .header-inner {
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+    }
+</style>

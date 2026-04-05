@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter:wght@300;400;500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Inter:wght@300;400;500&display=swap"
             rel="stylesheet"
         />
 
@@ -21,17 +21,17 @@
                 padding: 0;
             }
 
-            /* ─── Tokens ─────────────────────────────────────────── */
+            /* ─── Tokens: Retro palette ─────────────────────────── */
             :root {
-                --bg: #131a12;
-                --surface: #1d2a1b;
-                --text: #e4ede0;
-                --text-muted: #7a8c74;
-                --accent: #c4683a;
-                --link: #8fbe7e;
-                --rule: #243321;
+                --bg: #1A1916;
+                --surface: #242118;
+                --text: #C4A97A;
+                --text-muted: #7A6E4E;
+                --accent: #CC4422;
+                --link: #D4BC8A;
+                --rule: #2E2B20;
 
-                --font-heading: "Caprasimo", Georgia, serif;
+                --font-heading: "Almendra", Georgia, serif;
                 --font-body: "Source Serif 4", Georgia, serif;
                 --font-ui: "Inter", system-ui, sans-serif;
 
@@ -50,28 +50,9 @@
 
             body {
                 background-color: var(--bg);
-                background-image:
-                    radial-gradient(
-                        ellipse at 15% 10%,
-                        rgba(196, 104, 58, 0.13) 0%,
-                        transparent 45%
-                    ),
-                    radial-gradient(
-                        ellipse at 85% 20%,
-                        rgba(74, 103, 65, 0.15) 0%,
-                        transparent 40%
-                    ),
-                    radial-gradient(
-                        ellipse at 50% 80%,
-                        rgba(74, 103, 65, 0.1) 0%,
-                        transparent 50%
-                    ),
-                    radial-gradient(
-                        ellipse at 90% 90%,
-                        rgba(196, 104, 58, 0.08) 0%,
-                        transparent 40%
-                    );
-                background-attachment: fixed;
+                background-image: url("grunge-1.png");
+                background-repeat: repeat;
+                background-blend-mode: multiply;
                 color: var(--text);
                 font-family: var(--font-body);
                 line-height: 1.8;
@@ -99,7 +80,7 @@
             /* ─── Header / Nav ───────────────────────────────────── */
             header {
                 padding-block: var(--space-lg);
-                border-bottom: 1px solid var(--rule);
+                
             }
 
             .header-inner {
@@ -111,9 +92,8 @@
             }
 
             .site-name {
-                font-family: var(--font-heading);
+                font-family: var(--font-heading); font-style: italic; font-weight: 700;
                 font-size: 1.65rem;
-                font-weight: 400;
                 letter-spacing: 0.01em;
                 color: var(--text);
                 text-decoration: none;
@@ -161,9 +141,8 @@
             }
 
             .page-title {
-                font-family: var(--font-heading);
+                font-family: var(--font-heading); font-style: italic; font-weight: 700;
                 font-size: 3.8rem;
-                font-weight: 400;
                 line-height: 1.05;
                 color: var(--text);
                 letter-spacing: 0.01em;
@@ -219,7 +198,7 @@
             /* ─── Rule ───────────────────────────────────────────── */
             .about-rule {
                 border: none;
-                border-top: 1px solid var(--rule);
+                
                 margin-block: var(--space-xl);
             }
 
@@ -256,7 +235,7 @@
 
             .elsewhere-item a:hover {
                 border-color: var(--link);
-                background-color: rgba(143, 190, 126, 0.05);
+                background-color: rgba(196, 169, 122, 0.08);
                 text-decoration: none;
             }
 
@@ -302,7 +281,7 @@
 
             /* ─── Footer ─────────────────────────────────────────── */
             footer {
-                border-top: 1px solid var(--rule);
+                
                 padding-block: var(--space-lg);
             }
 
@@ -446,8 +425,7 @@
                     </p>
                 </div>
 
-                <!-- Rule -->
-                <hr class="about-rule" />
+
 
                 <!-- Find Me Elsewhere -->
                 <section aria-labelledby="elsewhere-heading">

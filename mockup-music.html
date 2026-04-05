@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>On Keeping a Record — longlostforgotten</title>
+        <title>Small Hours (Demo) — longlostforgotten</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -21,7 +21,7 @@
                 padding: 0;
             }
 
-            /* ─── Tokens: Retro palette ─────────────────────────── */
+            /* ─── Tokens ─────────────────────────────────────────── */
             :root {
                 --bg: #1A1916;
                 --surface: #242118;
@@ -80,7 +80,6 @@
             /* ─── Header / Nav ───────────────────────────────────── */
             header {
                 padding-block: var(--space-lg);
-                
             }
 
             .header-inner {
@@ -138,7 +137,6 @@
             .post-header {
                 padding-top: var(--space-xl);
                 padding-bottom: var(--space-lg);
-                
             }
 
             .post-meta {
@@ -154,7 +152,7 @@
 
             .post-type {
                 color: #f0ebe2;
-                background-color: var(--accent);
+                background-color: #4A6B7A;
                 padding: 0.15em 0.55em;
                 border-radius: 2px;
                 font-weight: 500;
@@ -173,9 +171,73 @@
                 max-width: 22ch;
             }
 
+            /* ─── Embed block ────────────────────────────────────── */
+            .music-embed {
+                margin-block: var(--space-xl);
+            }
+
+            .embed-platform-label {
+                font-family: var(--font-ui);
+                font-size: 0.62rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                margin-bottom: var(--space-sm);
+            }
+
+            /* Placeholder standing in for an actual iframe */
+            .embed-placeholder {
+                width: 100%;
+                height: 166px;
+                background-color: var(--surface);
+                border: 1px solid var(--rule);
+                border-radius: 3px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: var(--space-sm);
+                font-family: var(--font-ui);
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+            }
+
+            .embed-placeholder svg {
+                width: 28px;
+                height: 28px;
+                opacity: 0.4;
+            }
+
+            .embed-placeholder.bandcamp {
+                height: 120px;
+            }
+
+            /* Also show what a real SoundCloud iframe looks like dimensionally */
+            .embed-iframe-real {
+                width: 100%;
+                height: 166px;
+                border: none;
+                border-radius: 3px;
+            }
+
+            /* ─── Alternate platform note ────────────────────────── */
+            .embed-also {
+                margin-top: var(--space-sm);
+                font-family: var(--font-ui);
+                font-size: 0.7rem;
+                color: var(--text-muted);
+                letter-spacing: 0.02em;
+            }
+
+            .embed-also a {
+                color: var(--link);
+            }
+
             /* ─── Post Body ──────────────────────────────────────── */
             .post-body {
-                padding-block: var(--space-xl);
+                padding-bottom: var(--space-xl);
             }
 
             .post-body p {
@@ -190,7 +252,6 @@
                 margin-bottom: 0;
             }
 
-            /* ─── Headings within post body ──────────────────────── */
             .post-body h2 {
                 font-family: var(--font-heading); font-style: italic; font-weight: 700;
                 font-size: 1.5rem;
@@ -200,80 +261,39 @@
                 line-height: 1.2;
             }
 
-            .post-body h3 {
+            /* ─── Track credits ──────────────────────────────────── */
+            .track-credits {
+                margin-top: var(--space-lg);
+                padding: var(--space-md);
+                background-color: var(--surface);
+                border-radius: 3px;
+                border: 1px solid var(--rule);
+            }
+
+            .track-credits-heading {
                 font-family: var(--font-ui);
-                font-size: 0.78rem;
-                font-weight: 500;
+                font-size: 0.62rem;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
                 color: var(--text-muted);
-                margin-top: 2em;
-                margin-bottom: 0.75em;
+                margin-bottom: var(--space-sm);
             }
 
-            /* ─── Blockquote ─────────────────────────────────────── */
-            .post-body blockquote {
-                margin-block: 2em;
-                padding-left: var(--space-md);
-                border-left: 2px solid var(--accent);
-                font-style: italic;
-                color: var(--text-muted);
-                font-size: 1.05rem;
-                line-height: 1.7;
-                max-width: 55ch;
-            }
-
-            .post-body blockquote p {
-                margin-bottom: 0;
-                color: inherit;
-                font-size: inherit;
-            }
-
-            .post-body blockquote cite {
-                display: block;
-                margin-top: 0.6em;
-                font-style: normal;
+            .track-credits dl {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 0.3em var(--space-md);
                 font-family: var(--font-ui);
-                font-size: 0.72rem;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
+                font-size: 0.78rem;
+            }
+
+            .track-credits dt {
                 color: var(--text-muted);
-                opacity: 0.7;
+                white-space: nowrap;
             }
 
-            /* ─── Inline image ───────────────────────────────────── */
-            .post-image {
-                margin-block: 2.5em;
-            }
-
-            .post-image figure {
-                margin: 0;
-            }
-
-            .post-image-placeholder {
-                width: 100%;
-                aspect-ratio: 16 / 9;
-                background-color: var(--surface);
-                border: 1px solid var(--rule);
-                border-radius: 3px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: var(--font-ui);
-                font-size: 0.7rem;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
-                color: var(--text-muted);
-                opacity: 0.6;
-            }
-
-            .post-image figcaption {
-                margin-top: var(--space-sm);
-                font-family: var(--font-ui);
-                font-size: 0.72rem;
-                color: var(--text-muted);
-                line-height: 1.5;
-                font-style: italic;
+            .track-credits dd {
+                color: var(--text);
             }
 
             /* ─── Tags ───────────────────────────────────────────── */
@@ -282,7 +302,6 @@
                 flex-wrap: wrap;
                 gap: var(--space-sm);
                 padding-top: var(--space-lg);
-                
                 margin-top: var(--space-lg);
             }
 
@@ -296,9 +315,7 @@
                 padding: 0.3em 0.75em;
                 border-radius: 2px;
                 text-decoration: none;
-                transition:
-                    border-color 0.15s,
-                    color 0.15s;
+                transition: border-color 0.15s, color 0.15s;
             }
 
             .post-tag:hover {
@@ -310,7 +327,6 @@
             /* ─── Post Navigation ────────────────────────────────── */
             .post-nav {
                 padding-block: var(--space-xl);
-                
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: var(--space-lg);
@@ -336,17 +352,9 @@
                 color: var(--text-muted);
             }
 
-            .post-nav-label::before {
-                content: "← ";
-            }
-
-            .post-nav-item.next .post-nav-label::before {
-                content: "";
-            }
-
-            .post-nav-item.next .post-nav-label::after {
-                content: " →";
-            }
+            .post-nav-label::before { content: "← "; }
+            .post-nav-item.next .post-nav-label::before { content: ""; }
+            .post-nav-item.next .post-nav-label::after { content: " →"; }
 
             .post-nav-title {
                 font-family: var(--font-heading); font-style: italic; font-weight: 700;
@@ -372,7 +380,6 @@
 
             /* ─── Footer ─────────────────────────────────────────── */
             footer {
-                
                 padding-block: var(--space-lg);
             }
 
@@ -412,18 +419,14 @@
 
             /* ─── Responsive ─────────────────────────────────────── */
             @media (max-width: 600px) {
-                html {
-                    font-size: 16px;
-                }
+                html { font-size: 16px; }
 
                 .header-inner {
                     flex-direction: column;
                     gap: var(--space-sm);
                 }
 
-                .post-title {
-                    font-size: 2rem;
-                }
+                .post-title { font-size: 2rem; }
 
                 .post-nav {
                     grid-template-columns: 1fr;
@@ -450,10 +453,8 @@
                     <a href="/" class="site-name">longlostforgotten</a>
                     <nav aria-label="Main navigation">
                         <ul>
-                            <li>
-                                <a href="/writing" class="current">Writing</a>
-                            </li>
-                            <li><a href="/music">Music</a></li>
+                            <li><a href="/writing">Writing</a></li>
+                            <li><a href="/music" class="current">Music</a></li>
                             <li><a href="/reading">Reading</a></li>
                             <li><a href="/watching">Watching</a></li>
                             <li><a href="/about">About</a></li>
@@ -466,135 +467,94 @@
         <!-- ─── Main ─────────────────────────────────────────────── -->
         <main>
             <div class="container">
+
                 <!-- Post Header -->
                 <div class="post-header">
                     <div class="post-meta">
-                        <span class="post-type">Writing</span>
-                        <span class="post-date">July 14, 2025</span>
+                        <span class="post-type">Music</span>
+                        <span class="post-date">August 3, 2025</span>
                     </div>
-                    <h1 class="post-title">On Keeping a Record</h1>
+                    <h1 class="post-title">Small Hours (Demo)</h1>
+                </div>
+
+                <!-- Embed -->
+                <div class="music-embed">
+                    <p class="embed-platform-label">SoundCloud</p>
+                    <!-- Real SoundCloud embed would go here, e.g.:
+                    <iframe class="embed-iframe-real" scrolling="no" frameborder="no" allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url=...">
+                    </iframe> -->
+                    <div class="embed-placeholder">
+                        <!-- Soundcloud waveform icon -->
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 14.5C2 13.4 2.9 12.5 4 12.5s2 .9 2 2-.9 2-2 2-2-.9-2-2zm4-2c0-1.1.9-2 2-2s2 .9 2 2v4H6v-4zm4-2c0-1.7 1.3-3 3-3s3 1.3 3 3v6h-6v-6zm6-1c0-2.2 1.8-4 4-4v11h-4V9.5z" fill="currentColor"/>
+                        </svg>
+                        SoundCloud embed
+                    </div>
+                    <p class="embed-also">
+                        Also on <a href="#">Bandcamp</a>
+                    </p>
                 </div>
 
                 <!-- Post Body -->
                 <div class="post-body">
                     <p>
-                        There's something about writing things down that makes
-                        them feel more real — or maybe more finished. Like the
-                        act of naming a thing gives it its proper shape. I've
-                        been thinking about that a lot lately, sitting with a
-                        cup of coffee going cold on the desk beside me, trying
-                        to figure out why I keep wanting to write things that no
-                        one in particular has asked for.
+                        This one started as a voice memo at around 2am — just a chord
+                        shape I'd stumbled onto that I didn't want to lose. I came back
+                        to it a week later expecting to find nothing there, and instead
+                        the whole thing arrived in about forty minutes.
                     </p>
                     <p>
-                        The short answer is probably that I'm a person who
-                        forgets. Not dramatically, not in the way that worries
-                        doctors — just ordinarily, the way everyone forgets the
-                        things that seemed unforgettable at the time. The film
-                        that wrecked me on a Tuesday night in January. The exact
-                        phrasing of something a friend said that made me laugh
-                        until my eyes watered. The walk I took last autumn when
-                        the light was doing something I'd never quite seen it do
-                        before.
+                        The demo quality is intentional. I tried recording it cleaner
+                        and something got lost in the process — the slight room noise
+                        and the roughness around the edges felt like part of it. So
+                        this is the version that exists: a single take of the guitar,
+                        one pass of the vocal, minimal editing.
                     </p>
-
-                    <blockquote>
-                        <p>
-                            A diary is not so much a record of events as a
-                            record of feelings about events — which is why it
-                            remains readable long after the events themselves
-                            have ceased to matter.
-                        </p>
-                        <cite>— Alan Bennett</cite>
-                    </blockquote>
-
                     <p>
-                        I've kept notebooks on and off for most of my adult
-                        life, with all the attendant guilt of the gaps. There's
-                        a particular shame in opening a journal and finding the
-                        last entry is dated fourteen months ago, when you
-                        apparently had a lot of feelings about a train journey
-                        and then nothing, nothing, nothing until now. The blank
-                        pages feel accusatory.
+                        The title came after. It's that specific window of night that
+                        belongs entirely to itself — after the day has finished but
+                        before anything has started again. A lot of this record is
+                        going to live there, I think.
                     </p>
 
-                    <!-- Inline image -->
-                    <div class="post-image">
-                        <figure>
-                            <div class="post-image-placeholder">
-                                image placeholder
-                            </div>
-                            <figcaption>
-                                The desk. The coffee was cold before I thought
-                                to drink it, as usual.
-                            </figcaption>
-                        </figure>
+                    <!-- Track credits -->
+                    <div class="track-credits">
+                        <p class="track-credits-heading">Credits</p>
+                        <dl>
+                            <dt>Written</dt>
+                            <dd>2025</dd>
+                            <dt>Recorded</dt>
+                            <dd>Home studio, July 2025</dd>
+                            <dt>Guitar &amp; vocal</dt>
+                            <dd>John</dd>
+                            <dt>License</dt>
+                            <dd>All rights reserved</dd>
+                        </dl>
                     </div>
-
-                    <p>
-                        What I've learned — slowly, and with the help of several
-                        failed attempts — is that consistency matters less than
-                        I thought. The point was never to create an unbroken
-                        record. It was to create a record at all. Even a patchy
-                        one. Even one that skips whole seasons and doubles back
-                        on itself and occasionally records the same revelation
-                        twice, as though for the first time.
-                    </p>
-
-                    <h2>What this place is for</h2>
-
-                    <p>
-                        So this site is, in part, an attempt to solve a problem
-                        I've had with notebooks: they stay on the shelf. The
-                        things in them stay private not by intention but by
-                        inertia. I write something down and then no one else
-                        ever knows I thought it, which is sometimes exactly
-                        right and sometimes a small waste.
-                    </p>
-                    <p>
-                        I'm not sure yet what the right ratio is between public
-                        and private. I suspect I'll figure it out as I go. For
-                        now, the plan is to put things here when they feel worth
-                        putting somewhere — a piece of writing, a record I've
-                        been living inside, a film that changed the air in the
-                        room, a book I finished at two in the morning and
-                        couldn't stop thinking about.
-                    </p>
-                    <p>
-                        That's probably enough of an introduction. The best way
-                        to know what this is will be to watch what it becomes.
-                    </p>
 
                     <!-- Tags -->
                     <div class="post-tags">
-                        <a href="/writing/tags/journal" class="post-tag"
-                            >Journal</a
-                        >
-                        <a href="/writing/tags/writing" class="post-tag"
-                            >Writing</a
-                        >
-                        <a href="/writing/tags/process" class="post-tag"
-                            >Process</a
-                        >
+                        <a href="/music/tags/demo" class="post-tag">Demo</a>
+                        <a href="/music/tags/acoustic" class="post-tag">Acoustic</a>
+                        <a href="/music/tags/solo" class="post-tag">Solo</a>
                     </div>
                 </div>
 
                 <!-- Post Navigation -->
                 <nav class="post-nav" aria-label="Post navigation">
-                    <a href="/writing/july-notes" class="post-nav-item prev">
+                    <a href="/writing/on-keeping-a-record" class="post-nav-item prev">
                         <span class="post-nav-label">Previous</span>
-                        <span class="post-nav-title">July Notes</span>
+                        <span class="post-nav-title">On Keeping a Record</span>
                         <span class="post-nav-type">Writing</span>
                     </a>
-                    <a
-                        href="/music/small-hours-demo"
-                        class="post-nav-item next"
-                    >
+                    <a href="/music/two-windows" class="post-nav-item next">
                         <span class="post-nav-label">Next</span>
-                        <span class="post-nav-title">Small Hours (Demo)</span>
+                        <span class="post-nav-title">Two Windows</span>
                         <span class="post-nav-type">Music</span>
                     </a>
                 </nav>
+
             </div>
         </main>
 
@@ -605,28 +565,16 @@
                     <p class="footer-copy">longlostforgotten</p>
                     <ul class="social-links">
                         <li>
-                            <a
-                                href="https://bsky.app/profile/longlostforgotten.com"
-                                target="_blank"
-                                rel="noopener"
-                                >Bluesky</a
-                            >
+                            <a href="https://bsky.app/profile/longlostforgotten.com"
+                               target="_blank" rel="noopener">Bluesky</a>
                         </li>
                         <li>
-                            <a
-                                href="https://www.instagram.com/lnglostfrgttn/"
-                                target="_blank"
-                                rel="noopener"
-                                >Instagram</a
-                            >
+                            <a href="https://www.instagram.com/lnglostfrgttn/"
+                               target="_blank" rel="noopener">Instagram</a>
                         </li>
                         <li>
-                            <a
-                                href="https://www.threads.com/@lnglostfrgttn"
-                                target="_blank"
-                                rel="noopener"
-                                >Threads</a
-                            >
+                            <a href="https://www.threads.com/@lnglostfrgttn"
+                               target="_blank" rel="noopener">Threads</a>
                         </li>
                     </ul>
                 </div>

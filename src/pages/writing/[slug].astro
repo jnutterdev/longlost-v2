@@ -1,0 +1,123 @@
+---
+import Page from "../../layouts/Page.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const entries = await getCollection("writing");
+    return entries.map(entry => ({
+        params: { slug: entry.id },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric", month: "long", day: "numeric",
+});
+---
+
+<Page title={entry.data.title} currentNav="writing">
+    <div class="container">
+        <div class="post-header">
+            <div class="post-meta">
+                <span class="type-pill writing">Writing</span>
+                <span class="post-date">{dateFormatter.format(entry.data.date)}</span>
+            </div>
+            <h1 class="post-title">{entry.data.title}</h1>
+        </div>
+
+        <div class="post-body">
+            <Content />
+
+            {entry.data.tags.length > 0 && (
+                <div class="post-tags">
+                    {entry.data.tags.map(tag => (
+                        <a href={`/writing/tags/${tag}`} class="tag">{tag}</a>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
+</Page>
+
+<style>
+    .post-header {
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
+    }
+
+    .post-date {
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    .post-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 2.6rem;
+        line-height: 1.15;
+        color: var(--text);
+        letter-spacing: 0.01em;
+        max-width: 22ch;
+    }
+
+    .post-body {
+        padding-block: var(--space-xl);
+    }
+
+    .post-body :global(p) {
+        font-size: 1rem;
+        line-height: 1.85;
+        color: var(--text);
+        margin-bottom: 1.6em;
+        max-width: 65ch;
+    }
+
+    .post-body :global(h2) {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-top: 2.5em;
+        margin-bottom: 0.75em;
+        line-height: 1.2;
+    }
+
+    .post-body :global(blockquote) {
+        margin-block: 2em;
+        padding-left: var(--space-md);
+        border-left: 2px solid var(--accent);
+        font-style: italic;
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        max-width: 55ch;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+        padding-top: var(--space-lg);
+        margin-top: var(--space-lg);
+        border-top: 1px solid var(--rule);
+    }
+
+    @media (max-width: 600px) {
+        .post-title { font-size: 2rem; }
+    }
+</style>

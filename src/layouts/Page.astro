@@ -1,0 +1,25 @@
+---
+/**
+ * Page layout — wraps Base with Header + Footer.
+ * Used by all standard pages.
+ */
+import Base from "./Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+    title: string;
+    description?: string;
+    currentNav?: string;
+}
+
+const { title, description, currentNav } = Astro.props;
+---
+
+<Base title={title} description={description}>
+    <Header currentNav={currentNav} />
+    <main>
+        <slot />
+    </main>
+    <Footer />
+</Base>

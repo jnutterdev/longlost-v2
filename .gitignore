@@ -1,2 +1,15 @@
 .DS_Store
 .claude
+
+# Astro
+dist/
+.astro/
+node_modules/
+
+# Tina generated
+tina/__generated__/
+public/admin/
+
+# Env
+.env
+.env.local

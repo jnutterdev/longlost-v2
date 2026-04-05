@@ -1,0 +1,75 @@
+---
+import Page from "../../layouts/Page.astro";
+import { getCollection } from "astro:content";
+
+const entries = (await getCollection("music"))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric", month: "long", day: "numeric",
+});
+---
+
+<Page title="Music" currentNav="music">
+    <div class="container">
+        <div class="archive-header">
+            <h1 class="page-title">Music</h1>
+        </div>
+        <div class="archive-list">
+            {entries.length === 0 && <p class="empty">Nothing here yet.</p>}
+            {entries.map(entry => (
+                <article class="archive-entry">
+                    <span class="entry-date">{dateFormatter.format(entry.data.date)}</span>
+                    <h2 class="entry-title">
+                        <a href={`/music/${entry.id}`}>{entry.data.title}</a>
+                    </h2>
+                </article>
+            ))}
+        </div>
+    </div>
+</Page>
+
+<style>
+    .archive-header {
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
+
+    .page-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 3.8rem;
+        line-height: 1.05;
+        color: var(--text);
+    }
+
+    .archive-list { padding-bottom: var(--space-xl); }
+
+    .archive-entry { padding-block: var(--space-lg); }
+
+    .archive-entry + .archive-entry { border-top: 1px solid var(--rule); }
+
+    .entry-date {
+        display: block;
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: var(--space-sm);
+    }
+
+    .entry-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.6rem;
+        line-height: 1.25;
+    }
+
+    .entry-title a { color: var(--text); text-decoration: none; }
+    .entry-title a:hover { color: var(--link); text-decoration: none; }
+
+    .empty { color: var(--text-muted); font-style: italic; padding-block: var(--space-xl); }
+</style>

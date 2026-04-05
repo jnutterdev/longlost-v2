@@ -22,36 +22,29 @@ A personal blog at [longlostforgotten.com](https://longlostforgotten.com) — a 
 
 ## Design System
 
-### Color Palette — Forest & Stone (Dark)
+### Color Palette — Japanese Poster (Dark)
 
-The site defaults to **dark mode**. A light mode toggle is planned but will be designed after the dark layout is fully locked.
+The site uses a dark, characterful palette: near-black charcoal base, warm gold/tan text, and a punchy orange-red accent. A light mode toggle is planned but will be designed after the dark layout is fully locked.
 
 | Token | Name | Hex |
 |---|---|---|
-| `--bg` | Deep Forest | `#131A12` |
-| `--surface` | Dark Canopy | `#1D2A1B` |
-| `--text` | Morning Fog | `#E4EDE0` |
-| `--text-muted` | Stone | `#7A8C74` |
-| `--accent` | Terracotta | `#C4683A` |
-| `--link` | Sage | `#8FBE7E` |
-| `--rule` | Deep Rule | `#243321` |
+| `--bg` | Dark Charcoal | `#1A1916` |
+| `--surface` | Deep Warm | `#242118` |
+| `--text` | Warm Gold | `#C4A97A` |
+| `--text-muted` | Muted Gold | `#7A6E4E` |
+| `--accent` | Orange-Red | `#CC4422` |
+| `--link` | Light Gold | `#D4BC8A` |
+| `--rule` | Dark Rule | `#2E2B20` |
 
-#### Background Gradients
+#### Background Texture
 
-Subtle fixed radial gradients are layered over the background for visual depth. They use `background-attachment: fixed` so they behave like ambient light — staying in place as the page scrolls.
-
-| Position | Color | Opacity |
-|---|---|---|
-| Top-left | Terracotta `#C4683A` | 13% |
-| Top-right | Forest green `#4A6741` | 15% |
-| Bottom-center | Forest green `#4A6741` | 10% |
-| Bottom-right | Terracotta `#C4683A` | 8% |
+The background is a flat `#1A1916` field with a tiled grunge texture (`grunge-1.png`) blended via `background-blend-mode: multiply` — giving the pages a tactile, printed quality.
 
 ### Typography
 
 | Role | Font | Notes |
 |---|---|---|
-| **Headings** | [Caprasimo](https://fonts.google.com/specimen/Caprasimo) | Chunky rounded display serif. Retro warmth, strong personality. |
+| **Headings** | [Almendra](https://fonts.google.com/specimen/Almendra) — italic 700 | Ornate serif with gothic flourish. Italic bold throughout. |
 | **Body** | [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4) | Optical sizing, warm and highly readable at length. |
 | **UI / Meta** | [Inter](https://fonts.google.com/specimen/Inter) | Clean, neutral. Nav, dates, tags, labels. |
 
@@ -118,7 +111,7 @@ The blog follows a **POSSE** model (Publish on Own Site, Syndicate Elsewhere) �
 
 ## Mockups
 
-Design mockups are plain HTML files in the project root. They use the full design system (live Google Fonts, real color tokens, fixed background gradients) and can be opened directly in a browser.
+Design mockups are plain HTML files in the project root. They use the full design system (live Google Fonts, real color tokens, grunge background texture) and can be opened directly in a browser.
 
 | File | Page |
 |---|---|

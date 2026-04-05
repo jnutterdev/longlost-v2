@@ -1,0 +1,70 @@
+---
+const social = [
+    { href: "https://bsky.app/profile/longlostforgotten.com", label: "Bluesky" },
+    { href: "https://www.instagram.com/lnglostfrgttn/", label: "Instagram" },
+    { href: "https://www.threads.com/@lnglostfrgttn", label: "Threads" },
+];
+---
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <p class="footer-copy">&copy; 2004-{new Date().getFullYear()} longlostforgotten</p>
+
+            <ul class="social-links">
+                {social.map(({ href, label }) => (
+                    <li>
+                        <a href={href} target="_blank" rel="noopener">{label}</a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        padding-block: var(--space-lg);
+    }
+
+    .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+
+    .footer-copy {
+        font-family: var(--font-body);
+        font-style: italic;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+    }
+
+    .social-links {
+        display: flex;
+        gap: var(--space-md);
+        list-style: none;
+    }
+
+    .social-links a {
+        font-family: var(--font-ui);
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .social-links a:hover {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+        .footer-inner {
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+    }
+</style>

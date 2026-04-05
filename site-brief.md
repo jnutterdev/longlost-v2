@@ -100,32 +100,25 @@ Minimal. Quiet. Personal. Like a well-worn notebook or a shelf of favorite paper
 
 ### 6a. Color Palette ✓
 
-**Confirmed: Forest & Stone — Dark Mode**
+**Confirmed: Japanese Poster — Dark Charcoal / Warm Gold / Orange-Red**
 
-The site defaults to dark mode. The palette is drawn from the Forest & Stone direction, adapted to a deep dark background with earthy accent tones.
+The site uses a dark, characterful palette drawn from Japanese graphic design: near-black charcoal base, warm gold/tan text, and a punchy orange-red accent. The background is a flat dark field with a tiled grunge texture image (`grunge-1.png`) blended via `multiply` for a subtle worn, printed quality.
 
-| Role             | Color Name  | Hex       |
-| ---------------- | ----------- | --------- |
-| Background       | Deep Forest | `#131A12` |
-| Surface / Cards  | Dark Canopy | `#1D2A1B` |
-| Primary Text     | Morning Fog | `#E4EDE0` |
-| Secondary Text   | Stone       | `#7A8C74` |
-| Accent           | Terracotta  | `#C4683A` |
-| Link / Highlight | Sage        | `#8FBE7E` |
-| Rule / Border    | Deep Rule   | `#243321` |
+| Role             | Color Name    | Hex       |
+| ---------------- | ------------- | --------- |
+| Background       | Dark Charcoal | `#1A1916` |
+| Surface / Cards  | Deep Warm     | `#242118` |
+| Primary Text     | Warm Gold     | `#C4A97A` |
+| Secondary Text   | Muted Gold    | `#7A6E4E` |
+| Accent           | Orange-Red    | `#CC4422` |
+| Link / Highlight | Light Gold    | `#D4BC8A` |
+| Rule / Border    | Dark Rule     | `#2E2B20` |
 
-#### Background Gradients
+#### Background Texture
 
-Subtle fixed radial gradients are layered over the background to add visual depth without distracting from content. The gradients do not scroll — they behave like ambient light in the room.
+The body background uses `background-color: #1A1916` with `background-image: url("grunge-1.png")`, tiled at natural size and blended with `background-blend-mode: multiply`. This gives the pages a tactile, printed quality without heavy decoration.
 
-| Position      | Color                  | Opacity |
-| ------------- | ---------------------- | ------- |
-| Top-left      | Terracotta `#C4683A`   | 13%     |
-| Top-right     | Forest green `#4A6741` | 15%     |
-| Bottom-center | Forest green `#4A6741` | 10%     |
-| Bottom-right  | Terracotta `#C4683A`   | 8%      |
-
-> **Light mode:** A light/dark toggle is planned — to be designed once the dark mode layout is fully locked.
+> **Light mode:** A light/dark toggle is planned — to be designed after the dark layout is fully locked.
 
 ---
 
@@ -135,12 +128,12 @@ Subtle fixed radial gradients are layered over the background to add visual dept
 
 | Role          | Font                                                               | Notes                                                           |
 | ------------- | ------------------------------------------------------------------ | --------------------------------------------------------------- |
-| **Headings**  | [Caprasimo](https://fonts.google.com/specimen/Caprasimo)           | Chunky rounded display serif. Retro warmth, strong personality. |
-| **Body**      | [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4) | Optical sizing, warm and highly readable at length.             |
-| **UI / Meta** | [Inter](https://fonts.google.com/specimen/Inter)                   | Clean, neutral. Used for nav, dates, tags, labels.              |
+| **Headings**  | [Almendra](https://fonts.google.com/specimen/Almendra) — italic 700 | Ornate serif with gothic flourish. Used in italic bold throughout. |
+| **Body**      | [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4)  | Optical sizing, warm and highly readable at length.               |
+| **UI / Meta** | [Inter](https://fonts.google.com/specimen/Inter)                    | Clean, neutral. Used for nav, dates, tags, labels.                |
 
 **Other fonts explored and considered:**
-Playfair Display, Cormorant Garamond, DM Serif Display, Fraunces _(runner-up)_, Abril Fatface, Josefin Slab, Bodoni Moda
+Caprasimo _(previous pick)_, Playfair Display, Cormorant Garamond, DM Serif Display, Fraunces _(runner-up)_, Abril Fatface, Josefin Slab, Bodoni Moda
 
 ---
 
@@ -381,7 +374,7 @@ Playfair Display, Cormorant Garamond, DM Serif Display, Fraunces _(runner-up)_, 
 - [ ] Will photos be hosted on the blog or linked from Instagram? → **TBD — self-hosting on Apache server is an option, but other avenues may be explored**
 - [ ] What does the post URL structure look like?
 - [ ] Does the site need a dark mode? → **Yes, a light/dark toggle is desired — revisit once colors and layout are locked**
-- [x] ~~Which color palette and type pairing feels right?~~ → **Forest & Stone dark palette + Caprasimo / Source Serif 4 / Inter**
+- [x] ~~Which color palette and type pairing feels right?~~ → **Japanese Poster palette (dark charcoal / warm gold / orange-red) + Almendra italic 700 / Source Serif 4 / Inter**
 - [ ] Is there a tagline or short description for the site?
 
 ---

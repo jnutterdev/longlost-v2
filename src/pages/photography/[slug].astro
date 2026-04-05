@@ -1,0 +1,182 @@
+---
+import Page from "../../layouts/Page.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const entries = await getCollection("photography");
+    return entries.map(entry => ({
+        params: { slug: entry.id },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { images } = entry.data;
+const heroImage = images[0] ?? null;
+const restImages = images.slice(1);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric", month: "long", day: "numeric",
+});
+---
+
+<Page title={entry.data.title}>
+    <!-- Post header — narrow -->
+    <div class="container">
+        <div class="post-header">
+            <div class="post-meta">
+                <span class="type-pill photo">Photo</span>
+                <span class="post-date">{dateFormatter.format(entry.data.date)}</span>
+            </div>
+            <h1 class="post-title">{entry.data.title}</h1>
+        </div>
+    </div>
+
+    <!-- Hero image — wide -->
+    {heroImage && (
+        <div class="container-wide">
+            <figure class="photo-hero">
+                <img src={heroImage.src} alt={heroImage.alt ?? entry.data.title} class="photo-img hero" />
+                {heroImage.caption && (
+                    <figcaption class="photo-caption">{heroImage.caption}</figcaption>
+                )}
+            </figure>
+        </div>
+    )}
+
+    <!-- Notes — narrow -->
+    <div class="container">
+        <div class="post-body">
+            <Content />
+        </div>
+    </div>
+
+    <!-- Additional images — wide grid -->
+    {restImages.length > 0 && (
+        <div class="container-wide">
+            <div class="photo-grid">
+                {restImages.map(img => (
+                    <figure class="photo-grid-item">
+                        <img src={img.src} alt={img.alt ?? ""} class="photo-img" />
+                        {img.caption && (
+                            <figcaption class="photo-caption">{img.caption}</figcaption>
+                        )}
+                    </figure>
+                ))}
+            </div>
+        </div>
+    )}
+
+    <!-- Tags — narrow -->
+    <div class="container">
+        {entry.data.tags.length > 0 && (
+            <div class="post-tags">
+                {entry.data.tags.map(tag => (
+                    <a href={`/photography/tags/${tag}`} class="tag">{tag}</a>
+                ))}
+            </div>
+        )}
+    </div>
+</Page>
+
+<style>
+    .post-header {
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
+    }
+
+    .post-date {
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    .post-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 2.6rem;
+        line-height: 1.15;
+        color: var(--text);
+        letter-spacing: 0.01em;
+        max-width: 22ch;
+    }
+
+    .photo-hero {
+        margin-block: var(--space-lg);
+    }
+
+    .photo-img {
+        width: 100%;
+        display: block;
+        border-radius: 3px;
+    }
+
+    .photo-img.hero {
+        aspect-ratio: 3 / 2;
+        object-fit: cover;
+    }
+
+    .photo-caption {
+        margin-top: var(--space-sm);
+        font-family: var(--font-ui);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        font-style: italic;
+    }
+
+    .post-body {
+        padding-block: var(--space-lg);
+    }
+
+    .post-body :global(p) {
+        font-size: 1rem;
+        line-height: 1.85;
+        color: var(--text);
+        margin-bottom: 1.6em;
+        max-width: 65ch;
+    }
+
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-md);
+        padding-block: var(--space-lg);
+    }
+
+    .photo-grid-item {
+        margin: 0;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+        padding-block: var(--space-lg);
+    }
+
+    @media (max-width: 700px) {
+        .post-title { font-size: 2rem; }
+
+        .photo-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .photo-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

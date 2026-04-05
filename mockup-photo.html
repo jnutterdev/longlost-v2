@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>On Keeping a Record — longlostforgotten</title>
+        <title>Late October, Riverside — longlostforgotten</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -21,7 +21,7 @@
                 padding: 0;
             }
 
-            /* ─── Tokens: Retro palette ─────────────────────────── */
+            /* ─── Tokens ─────────────────────────────────────────── */
             :root {
                 --bg: #1A1916;
                 --surface: #242118;
@@ -36,6 +36,7 @@
                 --font-ui: "Inter", system-ui, sans-serif;
 
                 --measure: 680px;
+                --measure-wide: 960px;
                 --space-xs: 0.375rem;
                 --space-sm: 0.75rem;
                 --space-md: 1.25rem;
@@ -77,10 +78,16 @@
                 padding-inline: var(--space-md);
             }
 
+            /* Wider container for photo grid */
+            .container-wide {
+                max-width: var(--measure-wide);
+                margin-inline: auto;
+                padding-inline: var(--space-md);
+            }
+
             /* ─── Header / Nav ───────────────────────────────────── */
             header {
                 padding-block: var(--space-lg);
-                
             }
 
             .header-inner {
@@ -138,7 +145,6 @@
             .post-header {
                 padding-top: var(--space-xl);
                 padding-bottom: var(--space-lg);
-                
             }
 
             .post-meta {
@@ -154,7 +160,7 @@
 
             .post-type {
                 color: #f0ebe2;
-                background-color: var(--accent);
+                background-color: #8B6040;
                 padding: 0.15em 0.55em;
                 border-radius: 2px;
                 font-weight: 500;
@@ -173,9 +179,63 @@
                 max-width: 22ch;
             }
 
+            /* ─── Hero Image ─────────────────────────────────────── */
+            .photo-hero {
+                margin-top: var(--space-lg);
+                margin-bottom: var(--space-lg);
+            }
+
+            .photo-hero figure {
+                margin: 0;
+            }
+
+            .photo-placeholder {
+                width: 100%;
+                background-color: var(--surface);
+                border: 1px solid var(--rule);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: var(--font-ui);
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                opacity: 0.6;
+            }
+
+            .photo-placeholder.hero {
+                aspect-ratio: 3 / 2;
+                border-radius: 3px;
+            }
+
+            .photo-placeholder.landscape {
+                aspect-ratio: 4 / 3;
+                border-radius: 2px;
+            }
+
+            .photo-placeholder.portrait {
+                aspect-ratio: 2 / 3;
+                border-radius: 2px;
+            }
+
+            .photo-placeholder.square {
+                aspect-ratio: 1 / 1;
+                border-radius: 2px;
+            }
+
+            .photo-caption {
+                margin-top: var(--space-sm);
+                font-family: var(--font-ui);
+                font-size: 0.72rem;
+                color: var(--text-muted);
+                line-height: 1.5;
+                font-style: italic;
+            }
+
             /* ─── Post Body ──────────────────────────────────────── */
             .post-body {
-                padding-block: var(--space-xl);
+                padding-block: var(--space-lg);
             }
 
             .post-body p {
@@ -190,90 +250,49 @@
                 margin-bottom: 0;
             }
 
-            /* ─── Headings within post body ──────────────────────── */
-            .post-body h2 {
-                font-family: var(--font-heading); font-style: italic; font-weight: 700;
-                font-size: 1.5rem;
-                color: var(--text);
-                margin-top: 2.5em;
-                margin-bottom: 0.75em;
-                line-height: 1.2;
+            /* ─── Photo Grid ─────────────────────────────────────── */
+            .photo-grid-section {
+                padding-block: var(--space-lg);
             }
 
-            .post-body h3 {
+            .photo-grid-label {
                 font-family: var(--font-ui);
-                font-size: 0.78rem;
-                font-weight: 500;
+                font-size: 0.62rem;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
                 color: var(--text-muted);
-                margin-top: 2em;
-                margin-bottom: 0.75em;
+                margin-bottom: var(--space-md);
             }
 
-            /* ─── Blockquote ─────────────────────────────────────── */
-            .post-body blockquote {
-                margin-block: 2em;
-                padding-left: var(--space-md);
-                border-left: 2px solid var(--accent);
-                font-style: italic;
-                color: var(--text-muted);
-                font-size: 1.05rem;
-                line-height: 1.7;
-                max-width: 55ch;
+            /* Two-column grid */
+            .photo-grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-md);
             }
 
-            .post-body blockquote p {
-                margin-bottom: 0;
-                color: inherit;
-                font-size: inherit;
+            /* Three-column grid */
+            .photo-grid-3 {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: var(--space-md);
             }
 
-            .post-body blockquote cite {
-                display: block;
-                margin-top: 0.6em;
-                font-style: normal;
-                font-family: var(--font-ui);
-                font-size: 0.72rem;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
-                color: var(--text-muted);
-                opacity: 0.7;
+            /* Mixed: one wide + two stacked */
+            .photo-grid-mixed {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: var(--space-md);
             }
 
-            /* ─── Inline image ───────────────────────────────────── */
-            .post-image {
-                margin-block: 2.5em;
-            }
-
-            .post-image figure {
-                margin: 0;
-            }
-
-            .post-image-placeholder {
-                width: 100%;
-                aspect-ratio: 16 / 9;
-                background-color: var(--surface);
-                border: 1px solid var(--rule);
-                border-radius: 3px;
+            .photo-grid-mixed .stack {
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: var(--font-ui);
-                font-size: 0.7rem;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
-                color: var(--text-muted);
-                opacity: 0.6;
+                flex-direction: column;
+                gap: var(--space-md);
             }
 
-            .post-image figcaption {
-                margin-top: var(--space-sm);
-                font-family: var(--font-ui);
-                font-size: 0.72rem;
-                color: var(--text-muted);
-                line-height: 1.5;
-                font-style: italic;
+            .photo-grid-item figure {
+                margin: 0;
             }
 
             /* ─── Tags ───────────────────────────────────────────── */
@@ -282,7 +301,6 @@
                 flex-wrap: wrap;
                 gap: var(--space-sm);
                 padding-top: var(--space-lg);
-                
                 margin-top: var(--space-lg);
             }
 
@@ -296,9 +314,7 @@
                 padding: 0.3em 0.75em;
                 border-radius: 2px;
                 text-decoration: none;
-                transition:
-                    border-color 0.15s,
-                    color 0.15s;
+                transition: border-color 0.15s, color 0.15s;
             }
 
             .post-tag:hover {
@@ -310,7 +326,6 @@
             /* ─── Post Navigation ────────────────────────────────── */
             .post-nav {
                 padding-block: var(--space-xl);
-                
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: var(--space-lg);
@@ -336,17 +351,9 @@
                 color: var(--text-muted);
             }
 
-            .post-nav-label::before {
-                content: "← ";
-            }
-
-            .post-nav-item.next .post-nav-label::before {
-                content: "";
-            }
-
-            .post-nav-item.next .post-nav-label::after {
-                content: " →";
-            }
+            .post-nav-label::before { content: "← "; }
+            .post-nav-item.next .post-nav-label::before { content: ""; }
+            .post-nav-item.next .post-nav-label::after { content: " →"; }
 
             .post-nav-title {
                 font-family: var(--font-heading); font-style: italic; font-weight: 700;
@@ -372,7 +379,6 @@
 
             /* ─── Footer ─────────────────────────────────────────── */
             footer {
-                
                 padding-block: var(--space-lg);
             }
 
@@ -411,18 +417,24 @@
             }
 
             /* ─── Responsive ─────────────────────────────────────── */
-            @media (max-width: 600px) {
-                html {
-                    font-size: 16px;
-                }
+            @media (max-width: 700px) {
+                html { font-size: 16px; }
 
                 .header-inner {
                     flex-direction: column;
                     gap: var(--space-sm);
                 }
 
-                .post-title {
-                    font-size: 2rem;
+                .post-title { font-size: 2rem; }
+
+                .photo-grid-2,
+                .photo-grid-3,
+                .photo-grid-mixed {
+                    grid-template-columns: 1fr;
+                }
+
+                .photo-grid-mixed .stack {
+                    flex-direction: row;
                 }
 
                 .post-nav {
@@ -450,9 +462,7 @@
                     <a href="/" class="site-name">longlostforgotten</a>
                     <nav aria-label="Main navigation">
                         <ul>
-                            <li>
-                                <a href="/writing" class="current">Writing</a>
-                            </li>
+                            <li><a href="/writing">Writing</a></li>
                             <li><a href="/music">Music</a></li>
                             <li><a href="/reading">Reading</a></li>
                             <li><a href="/watching">Watching</a></li>
@@ -465,134 +475,120 @@
 
         <!-- ─── Main ─────────────────────────────────────────────── -->
         <main>
+            <!-- Post header — narrow container -->
             <div class="container">
-                <!-- Post Header -->
                 <div class="post-header">
                     <div class="post-meta">
-                        <span class="post-type">Writing</span>
-                        <span class="post-date">July 14, 2025</span>
+                        <span class="post-type">Photography</span>
+                        <span class="post-date">October 27, 2025</span>
                     </div>
-                    <h1 class="post-title">On Keeping a Record</h1>
+                    <h1 class="post-title">Late October, Riverside</h1>
                 </div>
+            </div>
 
-                <!-- Post Body -->
+            <!-- Hero image — wide container -->
+            <div class="container-wide">
+                <div class="photo-hero">
+                    <figure>
+                        <div class="photo-placeholder hero">hero image</div>
+                        <figcaption class="photo-caption">
+                            The path along the water, just before the light went.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Body notes — narrow container -->
+            <div class="container">
                 <div class="post-body">
                     <p>
-                        There's something about writing things down that makes
-                        them feel more real — or maybe more finished. Like the
-                        act of naming a thing gives it its proper shape. I've
-                        been thinking about that a lot lately, sitting with a
-                        cup of coffee going cold on the desk beside me, trying
-                        to figure out why I keep wanting to write things that no
-                        one in particular has asked for.
+                        I'd been meaning to walk this stretch for months. The
+                        river path gets quiet in late October — most people have
+                        given up on it by the time the weather turns, which is
+                        exactly when it becomes worth going.
                     </p>
                     <p>
-                        The short answer is probably that I'm a person who
-                        forgets. Not dramatically, not in the way that worries
-                        doctors — just ordinarily, the way everyone forgets the
-                        things that seemed unforgettable at the time. The film
-                        that wrecked me on a Tuesday night in January. The exact
-                        phrasing of something a friend said that made me laugh
-                        until my eyes watered. The walk I took last autumn when
-                        the light was doing something I'd never quite seen it do
-                        before.
+                        The light does something specific in that last hour before
+                        it goes. Everything gets a little amber and a little
+                        melancholy. I took most of these in about forty minutes.
                     </p>
+                </div>
+            </div>
 
-                    <blockquote>
-                        <p>
-                            A diary is not so much a record of events as a
-                            record of feelings about events — which is why it
-                            remains readable long after the events themselves
-                            have ceased to matter.
-                        </p>
-                        <cite>— Alan Bennett</cite>
-                    </blockquote>
+            <!-- Additional photos — wide container, mixed layout -->
+            <div class="container-wide">
+                <div class="photo-grid-section">
+                    <p class="photo-grid-label">More from this set</p>
 
-                    <p>
-                        I've kept notebooks on and off for most of my adult
-                        life, with all the attendant guilt of the gaps. There's
-                        a particular shame in opening a journal and finding the
-                        last entry is dated fourteen months ago, when you
-                        apparently had a lot of feelings about a train journey
-                        and then nothing, nothing, nothing until now. The blank
-                        pages feel accusatory.
-                    </p>
-
-                    <!-- Inline image -->
-                    <div class="post-image">
-                        <figure>
-                            <div class="post-image-placeholder">
-                                image placeholder
+                    <!-- Mixed grid: one large landscape + two stacked portraits -->
+                    <div class="photo-grid-mixed">
+                        <div class="photo-grid-item">
+                            <figure>
+                                <div class="photo-placeholder landscape">landscape</div>
+                                <figcaption class="photo-caption">The bridge at the bend.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="stack">
+                            <div class="photo-grid-item">
+                                <figure>
+                                    <div class="photo-placeholder square">square</div>
+                                    <figcaption class="photo-caption">Reed grass, still.</figcaption>
+                                </figure>
                             </div>
-                            <figcaption>
-                                The desk. The coffee was cold before I thought
-                                to drink it, as usual.
-                            </figcaption>
-                        </figure>
+                            <div class="photo-grid-item">
+                                <figure>
+                                    <div class="photo-placeholder square">square</div>
+                                    <figcaption class="photo-caption">Looking back towards the city.</figcaption>
+                                </figure>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <p>
-                        What I've learned — slowly, and with the help of several
-                        failed attempts — is that consistency matters less than
-                        I thought. The point was never to create an unbroken
-                        record. It was to create a record at all. Even a patchy
-                        one. Even one that skips whole seasons and doubles back
-                        on itself and occasionally records the same revelation
-                        twice, as though for the first time.
-                    </p>
-
-                    <h2>What this place is for</h2>
-
-                    <p>
-                        So this site is, in part, an attempt to solve a problem
-                        I've had with notebooks: they stay on the shelf. The
-                        things in them stay private not by intention but by
-                        inertia. I write something down and then no one else
-                        ever knows I thought it, which is sometimes exactly
-                        right and sometimes a small waste.
-                    </p>
-                    <p>
-                        I'm not sure yet what the right ratio is between public
-                        and private. I suspect I'll figure it out as I go. For
-                        now, the plan is to put things here when they feel worth
-                        putting somewhere — a piece of writing, a record I've
-                        been living inside, a film that changed the air in the
-                        room, a book I finished at two in the morning and
-                        couldn't stop thinking about.
-                    </p>
-                    <p>
-                        That's probably enough of an introduction. The best way
-                        to know what this is will be to watch what it becomes.
-                    </p>
-
-                    <!-- Tags -->
-                    <div class="post-tags">
-                        <a href="/writing/tags/journal" class="post-tag"
-                            >Journal</a
-                        >
-                        <a href="/writing/tags/writing" class="post-tag"
-                            >Writing</a
-                        >
-                        <a href="/writing/tags/process" class="post-tag"
-                            >Process</a
-                        >
+                <!-- Three-column grid for smaller shots -->
+                <div class="photo-grid-section">
+                    <div class="photo-grid-3">
+                        <div class="photo-grid-item">
+                            <figure>
+                                <div class="photo-placeholder square">square</div>
+                                <figcaption class="photo-caption">Fallen leaves on the bank.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="photo-grid-item">
+                            <figure>
+                                <div class="photo-placeholder square">square</div>
+                                <figcaption class="photo-caption">A heron, unmoving.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="photo-grid-item">
+                            <figure>
+                                <div class="photo-placeholder square">square</div>
+                                <figcaption class="photo-caption">The water, almost still.</figcaption>
+                            </figure>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Tags + nav — narrow container -->
+            <div class="container">
+                <div class="post-tags">
+                    <a href="/photography/tags/film" class="post-tag">Film</a>
+                    <a href="/photography/tags/autumn" class="post-tag">Autumn</a>
+                    <a href="/photography/tags/landscape" class="post-tag">Landscape</a>
                 </div>
 
                 <!-- Post Navigation -->
                 <nav class="post-nav" aria-label="Post navigation">
-                    <a href="/writing/july-notes" class="post-nav-item prev">
+                    <a href="/music/small-hours-demo" class="post-nav-item prev">
                         <span class="post-nav-label">Previous</span>
-                        <span class="post-nav-title">July Notes</span>
-                        <span class="post-nav-type">Writing</span>
-                    </a>
-                    <a
-                        href="/music/small-hours-demo"
-                        class="post-nav-item next"
-                    >
-                        <span class="post-nav-label">Next</span>
                         <span class="post-nav-title">Small Hours (Demo)</span>
                         <span class="post-nav-type">Music</span>
+                    </a>
+                    <a href="/writing/november" class="post-nav-item next">
+                        <span class="post-nav-label">Next</span>
+                        <span class="post-nav-title">November</span>
+                        <span class="post-nav-type">Writing</span>
                     </a>
                 </nav>
             </div>
@@ -605,28 +601,16 @@
                     <p class="footer-copy">longlostforgotten</p>
                     <ul class="social-links">
                         <li>
-                            <a
-                                href="https://bsky.app/profile/longlostforgotten.com"
-                                target="_blank"
-                                rel="noopener"
-                                >Bluesky</a
-                            >
+                            <a href="https://bsky.app/profile/longlostforgotten.com"
+                               target="_blank" rel="noopener">Bluesky</a>
                         </li>
                         <li>
-                            <a
-                                href="https://www.instagram.com/lnglostfrgttn/"
-                                target="_blank"
-                                rel="noopener"
-                                >Instagram</a
-                            >
+                            <a href="https://www.instagram.com/lnglostfrgttn/"
+                               target="_blank" rel="noopener">Instagram</a>
                         </li>
                         <li>
-                            <a
-                                href="https://www.threads.com/@lnglostfrgttn"
-                                target="_blank"
-                                rel="noopener"
-                                >Threads</a
-                            >
+                            <a href="https://www.threads.com/@lnglostfrgttn"
+                               target="_blank" rel="noopener">Threads</a>
                         </li>
                     </ul>
                 </div>

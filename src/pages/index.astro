@@ -1,0 +1,118 @@
+---
+import Page from "../layouts/Page.astro";
+import { getCollection } from "astro:content";
+
+// Gather all content types into one feed, sorted newest first
+const [writing, music, photography, books, film, misc] = await Promise.all([
+    getCollection("writing"),
+    getCollection("music"),
+    getCollection("photography"),
+    getCollection("books"),
+    getCollection("film"),
+    getCollection("misc"),
+]);
+
+const feed = [
+    ...writing.map(e => ({ ...e, type: "writing", href: `/writing/${e.id}` })),
+    ...music.map(e => ({ ...e, type: "music", href: `/music/${e.id}` })),
+    ...photography.map(e => ({ ...e, type: "photography", href: `/photography/${e.id}` })),
+    ...books.map(e => ({ ...e, type: "books", href: `/reading/${e.id}` })),
+    ...film.map(e => ({ ...e, type: "film", href: `/watching/${e.id}` })),
+    ...misc.map(e => ({ ...e, type: "misc", href: `/misc/${e.id}` })),
+].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric", month: "long", day: "numeric",
+});
+---
+
+<Page title="longlostforgotten">
+    <div class="container">
+        <div class="feed">
+            {feed.length === 0 && (
+                <p class="empty">Nothing here yet — check back soon.</p>
+            )}
+            {feed.map((entry) => {
+                const title = (entry.data as any).title ?? (entry.data as any).bookTitle ?? (entry.data as any).mediaTitle ?? "Untitled";
+                const excerpt = (entry.data as any).excerpt ?? null;
+                return (
+                    <article class="feed-entry">
+                        <div class="entry-meta">
+                            <span class={`type-pill ${entry.type}`}>
+                                {entry.type === "photography" ? "Photo" : entry.type.charAt(0).toUpperCase() + entry.type.slice(1)}
+                            </span>
+                            <span class="entry-date">
+                                {dateFormatter.format(entry.data.date)}
+                            </span>
+                        </div>
+                        <h2 class="entry-title">
+                            <a href={entry.href}>{title}</a>
+                        </h2>
+                        {excerpt && <p class="entry-excerpt">{excerpt}</p>}
+                    </article>
+                );
+            })}
+        </div>
+    </div>
+</Page>
+
+<style>
+    .feed {
+        padding-block: var(--space-lg);
+    }
+
+    .feed-entry {
+        padding-block: var(--space-lg);
+    }
+
+    .feed-entry + .feed-entry {
+        border-top: 1px solid var(--rule);
+    }
+
+    .entry-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-sm);
+    }
+
+    .entry-date {
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+
+    .entry-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.6rem;
+        line-height: 1.25;
+        margin-bottom: var(--space-sm);
+    }
+
+    .entry-title a {
+        color: var(--text);
+        text-decoration: none;
+    }
+
+    .entry-title a:hover {
+        color: var(--link);
+        text-decoration: none;
+    }
+
+    .entry-excerpt {
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--text-muted);
+        max-width: 60ch;
+    }
+
+    .empty {
+        color: var(--text-muted);
+        font-style: italic;
+        padding-block: var(--space-xl);
+    }
+</style>

@@ -1,0 +1,99 @@
+---
+import Page from "../../layouts/Page.astro";
+import { getCollection } from "astro:content";
+
+const entries = (await getCollection("film"))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric", month: "long", day: "numeric",
+});
+---
+
+<Page title="Watching" currentNav="watching">
+    <div class="container">
+        <div class="archive-header">
+            <h1 class="page-title">Watching</h1>
+        </div>
+        <div class="archive-list">
+            {entries.length === 0 && <p class="empty">Nothing logged yet.</p>}
+            {entries.map(entry => (
+                <article class="film-entry">
+                    <h2 class="film-title">
+                        <a href={`/watching/${entry.id}`}>{entry.data.mediaTitle}</a>
+                    </h2>
+                    <p class="film-meta">
+                        {[entry.data.director, entry.data.year].filter(Boolean).join(", ")}
+                        {entry.data.mediaType && (
+                            <span class="film-type">{entry.data.mediaType}</span>
+                        )}
+                    </p>
+                    <span class="entry-date">{dateFormatter.format(entry.data.date)}</span>
+                </article>
+            ))}
+        </div>
+    </div>
+</Page>
+
+<style>
+    .archive-header {
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
+
+    .page-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 3.8rem;
+        line-height: 1.05;
+        color: var(--text);
+    }
+
+    .archive-list { padding-bottom: var(--space-xl); }
+
+    .film-entry { padding-block: var(--space-md); }
+    .film-entry + .film-entry { border-top: 1px solid var(--rule); }
+
+    .film-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.3rem;
+        line-height: 1.25;
+    }
+
+    .film-title a { color: var(--text); text-decoration: none; }
+    .film-title a:hover { color: var(--link); text-decoration: none; }
+
+    .film-meta {
+        font-family: var(--font-ui);
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 0.2em;
+    }
+
+    .film-type {
+        display: inline-block;
+        margin-left: var(--space-sm);
+        font-size: 0.65rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border: 1px solid var(--rule);
+        padding: 0.1em 0.5em;
+        border-radius: 2px;
+    }
+
+    .entry-date {
+        display: block;
+        font-family: var(--font-ui);
+        font-size: 0.65rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-top: 0.3em;
+        opacity: 0.7;
+    }
+
+    .empty { color: var(--text-muted); font-style: italic; padding-block: var(--space-xl); }
+</style>

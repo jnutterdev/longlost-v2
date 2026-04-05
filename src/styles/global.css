@@ -1,0 +1,116 @@
+/* ─── Tokens ─────────────────────────────────────────── */
+:root {
+    --bg: #1A1916;
+    --surface: #242118;
+    --text: #C4A97A;
+    --text-muted: #7A6E4E;
+    --accent: #CC4422;
+    --link: #D4BC8A;
+    --rule: #2E2B20;
+
+    --font-heading: "Almendra", Georgia, serif;
+    --font-body: "Source Serif 4", Georgia, serif;
+    --font-ui: "Inter", system-ui, sans-serif;
+
+    --measure: 680px;
+    --measure-wide: 960px;
+    --space-xs: 0.375rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.25rem;
+    --space-lg: 2.5rem;
+    --space-xl: 4rem;
+}
+
+/* ─── Reset ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── Base ───────────────────────────────────────────── */
+html {
+    font-size: 18px;
+}
+
+body {
+    background-color: var(--bg);
+    background-image: url("/grunge-1.png");
+    background-repeat: repeat;
+    background-blend-mode: multiply;
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+}
+
+/* ─── Layout ─────────────────────────────────────────── */
+.container {
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+}
+
+.container-wide {
+    max-width: var(--measure-wide);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+}
+
+/* ─── Type pills ─────────────────────────────────────── */
+.type-pill {
+    color: #f0ebe2;
+    background-color: var(--accent);
+    padding: 0.15em 0.55em;
+    border-radius: 2px;
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.type-pill.writing  { background-color: var(--accent); }
+.type-pill.music    { background-color: #4A6B7A; }
+.type-pill.photo    { background-color: #8B6040; }
+.type-pill.books    { background-color: #7A6B4A; }
+.type-pill.film     { background-color: #6B5578; }
+.type-pill.misc     { background-color: #4A4A4A; }
+
+/* ─── Tags ───────────────────────────────────────────── */
+.tag {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--rule);
+    padding: 0.3em 0.75em;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.tag:hover {
+    color: var(--link);
+    border-color: var(--link);
+    text-decoration: none;
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 600px) {
+    html { font-size: 16px; }
+}

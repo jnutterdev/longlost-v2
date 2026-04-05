@@ -1,0 +1,125 @@
+---
+import Page from "../layouts/Page.astro";
+
+// Update this manually or pull from a content file in the future
+const lastUpdated = "April 2026";
+---
+
+<Page title="Now">
+    <div class="container">
+        <div class="now-header">
+            <h1 class="now-title">now</h1>
+            <p class="now-updated">Last updated {lastUpdated}</p>
+        </div>
+
+        <div class="now-body">
+            <section class="now-section">
+                <span class="now-label">Reading</span>
+                <div class="now-content">
+                    <p>Update this with what you're reading.</p>
+                </div>
+            </section>
+
+            <section class="now-section">
+                <span class="now-label">Listening</span>
+                <div class="now-content">
+                    <p>Update this with what you're listening to.</p>
+                </div>
+            </section>
+
+            <section class="now-section">
+                <span class="now-label">Watching</span>
+                <div class="now-content">
+                    <p>Update this with what you're watching.</p>
+                </div>
+            </section>
+
+            <section class="now-section">
+                <span class="now-label">Working on</span>
+                <div class="now-content">
+                    <p>This site.</p>
+                </div>
+            </section>
+        </div>
+
+        <p class="now-attribution">
+            This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now page</a>.
+            If you have a site of your own, consider making one.
+        </p>
+    </div>
+</Page>
+
+<style>
+    .now-header {
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-lg);
+    }
+
+    .now-title {
+        font-family: var(--font-heading);
+        font-style: italic;
+        font-weight: 700;
+        font-size: 3.8rem;
+        line-height: 1.05;
+        color: var(--text);
+    }
+
+    .now-updated {
+        font-family: var(--font-ui);
+        font-size: 0.65rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-top: var(--space-sm);
+    }
+
+    .now-body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+        padding-bottom: var(--space-xl);
+    }
+
+    .now-section {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: var(--space-md);
+    }
+
+    .now-label {
+        font-family: var(--font-ui);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding-top: 0.25em;
+    }
+
+    .now-content p {
+        font-size: 1rem;
+        line-height: 1.85;
+        color: var(--text);
+        margin-bottom: 0.8em;
+    }
+
+    .now-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .now-attribution {
+        font-family: var(--font-body);
+        font-style: italic;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        padding-bottom: var(--space-xl);
+    }
+
+    @media (max-width: 600px) {
+        .now-section {
+            grid-template-columns: 1fr;
+            gap: var(--space-xs);
+        }
+    }
+</style>
