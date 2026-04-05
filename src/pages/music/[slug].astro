@@ -19,8 +19,13 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 // Build the correct embed src from the embedUrl
-const { embedUrl, platform, alternatePlatformUrl } = entry.data;
+const { embedUrl, bandcampAlbumId, platform, alternatePlatformUrl } = entry.data;
 const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCloud";
+
+const bandcampEmbedSrc = bandcampAlbumId
+    ? `https://bandcamp.com/EmbeddedPlayer/album=${bandcampAlbumId}/size=large/bgcol=333333/linkcol=9a64ff/tracklist=false/artwork=small/transparent=true/`
+    : null;
+const iframeSrc = platform === "bandcamp" && bandcampEmbedSrc ? bandcampEmbedSrc : embedUrl;
 ---
 
 <Page title={entry.data.title} currentNav="music">
@@ -40,8 +45,8 @@ const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCl
                 <p class="embed-label">{platform.charAt(0).toUpperCase() + platform.slice(1)}</p>
             )}
             <iframe
-                class="embed-iframe"
-                src={embedUrl}
+                class:list={["embed-iframe", platform === "bandcamp" && "embed-iframe--bandcamp"]}
+                src={iframeSrc}
                 scrolling="no"
                 frameborder="no"
                 allow="autoplay"
@@ -120,6 +125,10 @@ const alternatePlatformLabel = platform === "soundcloud" ? "Bandcamp" : "SoundCl
         border: none;
         border-radius: 3px;
         display: block;
+    }
+
+    .embed-iframe--bandcamp {
+        height: 120px;
     }
 
     .embed-also {
